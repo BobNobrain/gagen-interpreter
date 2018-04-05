@@ -7,6 +7,8 @@ const {
     Stack
 } = terms;
 
+import Parser from './parser';
+
 
 window.stack = new Stack([
     new ParenGroup([
@@ -79,4 +81,13 @@ window.start = (limit = 20) => {
 };
 
 window.terms = terms;
-window.start(10);
+
+window.Parser = Parser;
+
+const expr = '\\x. succ ((\\x. x) 6)';
+const p = new Parser();
+console.log(expr);
+p.tokenize(expr);
+console.log(p.tokens.join(' '));
+p.buildAst();
+console.log(p.ast);
